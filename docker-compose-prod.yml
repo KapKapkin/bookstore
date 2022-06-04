@@ -1,0 +1,29 @@
+version: "3.10.2"
+   
+services:
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - SECRET_KEY=django-insecure-ux)tn8^w^88*gzx8jb@$yw@xp_s-+-a1j%w^06tp+*e1=74*74
+      - DEBUG=0
+      - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51L55nMAjueSEAOMfx8p7IB6vbsUlDLSdMP47uM6USE0hlq6kD3fncSnRxBp7WB5GMBD9zYvNO1YcBRKfcFtq1UJe00R5eEaJqP
+      - STRIPE_TEST_SECRET_KEY=sk_test_51L55nMAjueSEAOMfTRirvlDhFDStpEH4hCiBKjwogJLENAy2jTfagnrb6nR0MAGxhdHcF9W2gsw2nOFsRpJPiCdG00GlfXqcER
+    depends_on:
+      - db
+      
